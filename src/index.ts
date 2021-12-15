@@ -12,7 +12,7 @@ const initBoids = (numBoids: number): Boid[] => {
 
 	// TODO: maybe randomize their x/y positions?
 	for(let i = 0; i < numBoids; i++){
-		let boid = new Boid(new Victor(0, 0), new Victor(0, 0));
+		let boid = new Boid(i+1, new Victor(0, 0), new Victor(0, 0));
 		boids.push(boid);
 	}
 
