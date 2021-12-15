@@ -2,12 +2,21 @@ import Victor from 'victor';
 
 class Boid{
 
+	private id: number;
 	private position: Victor;
 	private velocity: Victor;
 
-	constructor(positionVector: Victor, velocityVector: Victor){
+	constructor(id: number, positionVector: Victor, velocityVector: Victor){
+		this.id = id;
 		this.position = positionVector;
 		this.velocity = velocityVector;
+	}
+
+	/**
+	 * Get the Boid's id
+	 */
+	getId(): number{
+		return this.id;
 	}
 
 	/**
