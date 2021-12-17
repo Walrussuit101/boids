@@ -1,5 +1,10 @@
 import { Boid }from './models';
 import Victor from 'victor';
+import {
+	ruleOne,
+	ruleTwo,
+	ruleThree
+} from './utils';
 
 /**
  * Initialize an array of Boids
@@ -17,6 +22,29 @@ const initBoids = (numBoids: number): Boid[] => {
 	}
 
 	return boids;
+}
+
+/**
+ * Move boids to new position after applying the 3 rules
+ *
+ * @param allBoids All current boids
+ * @returns void
+ */
+const moveBoids = (allBoids: Boid[]): void => {
+	allBoids.forEach(b => {
+
+		// apply all rules to current Boid
+		let v1 = ruleOne(b, allBoids);
+		let v2 = ruleTwo(b, allBoids);
+		let v3 = ruleThree(b, allBoids);
+
+		// set current Boid's velocity to sum of v1,2,3
+		let totalV = v1.add(v2.add(v3));
+		b.addToVelocity(totalV);
+
+		// update current Boid's position with it's new velocity
+		b.move();
+	})
 }
 
 const main = (): void => {
