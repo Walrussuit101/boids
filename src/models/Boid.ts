@@ -14,6 +14,8 @@ class Boid{
 
 	/**
 	 * Get the Boid's id
+	 *
+	 * @returns number
 	 */
 	getId(): number{
 		return this.id;
@@ -21,6 +23,8 @@ class Boid{
 
 	/**
 	 * Get the Boid's position Victor
+	 *
+	 * @returns Victor
 	 */
 	getPosition(): Victor {
 		return this.position;
@@ -28,6 +32,8 @@ class Boid{
 
 	/**
 	 * Get the Boid's velocity Victor
+	 *
+	 * @returns Victor
 	 */
 	getVelocity(): Victor {
 		return this.velocity;
@@ -35,6 +41,8 @@ class Boid{
 
 	/**
 	 * "Move" the Boid by adding the Boid's velocity Victor to it's position Victor
+	 *
+	 * @returns void
 	 */
 	move(): void {
 		this.position.add(this.velocity);
@@ -44,6 +52,7 @@ class Boid{
 	 * Add a Victor to the Boid's velocity Victor
 	 *
 	 * @param victorToAdd Victor to add to boid's velocity
+	 * @returns void
 	 */
 	addToVelocity(victorToAdd: Victor): void {
 		this.velocity.add(victorToAdd);
