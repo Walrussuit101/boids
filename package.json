@@ -4,7 +4,7 @@
   "description": "JS/TS implementation of the Boids algorithm",
   "main": "index.ts",
   "scripts": {
-	"dev": "nodemon -e ts,html --exec \"npm start\"",
+    "dev": "nodemon -e ts,html --exec \"npm start\"",
     "start": "npm run compile:client && ts-node src/index.ts",
     "compile:client": "tsc -p ./src/client --outDir ./dist",
     "test": "echo \"Error: no test specified\" && exit 1"
