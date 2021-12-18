@@ -5,6 +5,7 @@
   "main": "index.ts",
   "scripts": {
 	"start": "ts-node src/index.ts",
+	"compile:client": "tsc -p ./src/client --outDir ./dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
