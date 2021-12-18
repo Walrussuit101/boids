@@ -1,63 +1,24 @@
-import { Boid }from './models';
-import Victor from 'victor';
-import {
-	ruleOne,
-	ruleTwo,
-	ruleThree
-} from './utils';
+import express, { Response } from 'express';
+import path from 'path';
 
-/**
- * Initialize an array of Boids
- *
- * @param numBoids Number of boids to init
- * @returns Boid[]
- */
-const initBoids = (numBoids: number): Boid[] => {
-	const boids: Boid[] = [];
+const server = express();
+const port = 8000;
 
-	// TODO: maybe randomize their x/y positions?
-	for(let i = 0; i < numBoids; i++){
-		let boid = new Boid(i+1, new Victor(0, 0), new Victor(0, 0));
-		boids.push(boid);
-	}
+// return the compiled client js file
+server.get("/client.js", (_, res: Response) => {
+	res.sendFile(path.join(__dirname, "../dist/client.js"));
+});
 
-	return boids;
-}
+// return two.js library
+server.get("/two.js", (_, res: Response) => {
+	res.sendFile(path.join(__dirname, "../node_modules/two.js/build/two.min.js"));
+});
 
-/**
- * Move boids to new position after applying the 3 rules
- *
- * @param allBoids All current boids
- * @returns void
- */
-const moveBoids = (allBoids: Boid[]): void => {
-	allBoids.forEach(b => {
+// root path will send the html file
+server.get("/", (_, res: Response) => {
+	res.sendFile(path.join(__dirname, "./client/index.html"));
+});
 
-		// apply all rules to current Boid
-		let v1 = ruleOne(b, allBoids);
-		let v2 = ruleTwo(b, allBoids);
-		let v3 = ruleThree(b, allBoids);
-
-		// set current Boid's velocity to sum of v1,2,3
-		let totalV = v1.add(v2.add(v3));
-		b.addToVelocity(totalV);
-
-		// update current Boid's position with it's new velocity
-		b.move();
-	})
-}
-
-const main = (): void => {
-	const NUM_BOIDS = 10;
-
-	const boids = initBoids(NUM_BOIDS);
-
-	console.log(boids);
-}
-
-try{
-	main();
-}catch(e){
-	console.error(e);
-	process.exit(1);
-}
+server.listen(port, () => {
+	console.log(`Listening @ http://localhost:${port}`);
+});
