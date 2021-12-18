@@ -2,7 +2,7 @@
   "name": "walrussuit101-boids",
   "version": "1.0.0",
   "description": "JS/TS implementation of the Boids algorithm",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
 	"start": "ts-node src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
