@@ -5,8 +5,9 @@
   "main": "index.ts",
   "scripts": {
     "dev": "nodemon -e ts,html --exec \"npm start\"",
-    "start": "npm run compile:client && ts-node src/index.ts",
-    "compile:client": "tsc -p ./src/client --outDir ./dist",
+    "start": "npm run compile:clientDir && ts-node src/index.ts",
+    "compile:clientDir": "tsc -p ./src/client --outDir ./dist",
+	"run:client": "ts-node ./src/client/client.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -27,7 +28,7 @@
     "express": "^4.17.2",
     "nodemon": "^2.0.15",
     "ts-node": "^10.4.0",
-    "two.js": "^0.7.13",
+    "twojs-ts": "^0.7.0-13",
     "typescript": "^4.5.4",
     "victor": "^1.1.0"
   }
