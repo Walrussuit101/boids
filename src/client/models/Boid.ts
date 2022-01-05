@@ -1,12 +1,12 @@
-import Victor from 'victor';
+import { Vector } from 'twojs-ts';
 
 class Boid{
 
 	private id: number;
-	private position: Victor;
-	private velocity: Victor;
+	private position: Vector;
+	private velocity: Vector;
 
-	constructor(id: number, positionVector: Victor, velocityVector: Victor){
+	constructor(id: number, positionVector: Vector, velocityVector: Vector){
 		this.id = id;
 		this.position = positionVector;
 		this.velocity = velocityVector;
@@ -22,20 +22,20 @@ class Boid{
 	}
 
 	/**
-	 * Get the Boid's position Victor
+	 * Get the Boid's position Vector
 	 *
-	 * @returns Victor
+	 * @returns Vector
 	 */
-	getPosition(): Victor {
+	getPosition(): Vector{
 		return this.position;
 	}
 
 	/**
-	 * Get the Boid's velocity Victor
+	 * Get the Boid's velocity Vector
 	 *
-	 * @returns Victor
+	 * @returns Vector
 	 */
-	getVelocity(): Victor {
+	getVelocity(): Vector{
 		return this.velocity;
 	}
 
@@ -45,17 +45,17 @@ class Boid{
 	 * @returns void
 	 */
 	move(): void {
-		this.position.add(this.velocity);
+		this.position.addSelf(this.velocity)
 	}
 
 	/**
-	 * Add a Victor to the Boid's velocity Victor
+	 * Add a Vector to the Boid's velocity Vector
 	 *
-	 * @param victorToAdd Victor to add to boid's velocity
+	 * @param vectorToAdd Vector to add to boid's velocity
 	 * @returns void
 	 */
-	addToVelocity(victorToAdd: Victor): void {
-		this.velocity.add(victorToAdd);
+	addToVelocity(vectorToAdd: Vector): void {
+		this.velocity.addSelf(vectorToAdd);
 	}
 }
 

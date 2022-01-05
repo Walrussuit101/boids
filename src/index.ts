@@ -11,7 +11,7 @@ server.get("/client.js", (_, res: Response) => {
 
 // return two.js library
 server.get("/two.js", (_, res: Response) => {
-	res.sendFile(path.join(__dirname, "../node_modules/two.js/build/two.min.js"));
+	res.sendFile(path.join(__dirname, "../node_modules/twojs-ts/two.js"));
 });
 
 // root path will send the html file
