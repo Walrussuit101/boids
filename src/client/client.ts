@@ -1,12 +1,10 @@
 import { Boid }from './models';
 import { Vector } from 'twojs-ts';
-/*
 import {
 	ruleOne,
 	ruleTwo,
 	ruleThree
 } from './utils';
-*/
 
 /**
  * Initialize an array of Boids
@@ -34,27 +32,17 @@ const initBoids = (numBoids: number): Boid[] => {
  */
 const moveBoids = (allBoids: Boid[]): void => {
 	allBoids.forEach(b => {
-
-		/* TODO:
-		 * - switch all rule implementations to use Two.Vector
-		 * - adjust addition of v1, v2, and v3 to use correct Two.Vector funcs
-		 * - remove commented imports of rules
-		 * - remove comments below / update code
-		 */
-
 		// apply all rules to current Boid
-		/*
 		let v1 = ruleOne(b, allBoids);
 		let v2 = ruleTwo(b, allBoids);
 		let v3 = ruleThree(b, allBoids);
 
 		// set current Boid's velocity to sum of v1,2,3
-		let totalV = v1.add(v2.add(v3));
+		let totalV = v1.addSelf(v2.addSelf(v3));
 		b.addToVelocity(totalV);
 
 		// update current Boid's position with it's new velocity
 		b.move();
-		*/
 	})
 }
 
