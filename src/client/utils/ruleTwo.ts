@@ -1,14 +1,14 @@
 import { Boid } from '../models';
 import { Vector } from 'twojs-ts';
 
-/**Get the velocity Victor after applying rule two
+/**Get the velocity Vector after applying rule two
  *
  * Rule Two:
  *  - Boids try to keep a small distance away from other objects (including other boids). 
  *
  * @param boid Boid to apply the rule to
  * @param allBoids All the current boids
- * @returns Victor
+ * @returns Vector 
  */
 const ruleTwo = (boid: Boid, allBoids: Boid[]): Vector => {
 

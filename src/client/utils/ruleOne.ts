@@ -1,14 +1,14 @@
 import { Boid } from '../models';
 import { Vector } from 'twojs-ts';
 
-/**Get the velocity Victor after applying rule one
+/**Get the velocity Vector after applying rule one
  *
  * Rule One: 
  *  - Boids try to fly towards the centre of mass of neighbouring boids
  *
  * @param boid Boid to apply the rule to
  * @param allBoids All the current boids
- * @returns Victor
+ * @returns Vector 
  */
 const ruleOne = (boid: Boid, allBoids: Boid[]): Vector => {
 

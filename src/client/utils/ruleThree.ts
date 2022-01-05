@@ -1,14 +1,14 @@
 import { Boid } from '../models';
 import { Vector } from 'twojs-ts';
 
-/**Get the velocity Victor after applying rule three
+/**Get the velocity Vector after applying rule three
  *
  * Rule Three:
  *  - Boids try to match velocity with near boids.
  *
  * @param boid Boid to apply the rule to
  * @param allBoids All the current boids
- * @returns Victor
+ * @returns Vector
  */
 const ruleThree = (boid: Boid, allBoids: Boid[]): Vector => {
 	
