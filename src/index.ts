@@ -6,7 +6,7 @@ const port = 8000;
 
 // return the compiled client js file
 server.get("/bundle.js", (_, res: Response) => {
-	res.sendFile(path.join(__dirname, "../dist/bundle.js"));
+	res.sendFile(path.join(__dirname, "client/dist/bundle.js"));
 });
 
 // root path will send the html file
