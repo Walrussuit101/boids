@@ -5,9 +5,9 @@
   "main": "index.ts",
   "scripts": {
     "dev": "nodemon -e ts,html,json --exec \"npm start\"",
-    "start": "npm run compile:clientDir && ts-node src/index.ts",
-    "compile:clientDir": "webpack --mode='production' --no-stats",
-    "run:client": "ts-node ./src/client/client.ts"
+    "start": "npm run compile:client && ts-node src/index.ts",
+    "compile:client": "webpack --mode='production' --no-stats",
+    "client": "ts-node ./src/client/client.ts"
   },
   "repository": {
     "type": "git",
