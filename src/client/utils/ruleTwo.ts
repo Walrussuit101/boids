@@ -1,5 +1,5 @@
 import { Boid } from '../models';
-import Victor from 'victor';
+import { Vector } from 'twojs-ts';
 
 /**Get the velocity Victor after applying rule two
  *
@@ -10,9 +10,9 @@ import Victor from 'victor';
  * @param allBoids All the current boids
  * @returns Victor
  */
-const ruleTwo = (boid: Boid, allBoids: Boid[]): Victor => {
+const ruleTwo = (boid: Boid, allBoids: Boid[]): Vector => {
 
-	let c = new Victor(0, 0);
+	let c = new Vector(0, 0);
 
 	/* get a velocity for the boid `boid` to move
 	 *
@@ -21,10 +21,10 @@ const ruleTwo = (boid: Boid, allBoids: Boid[]): Victor => {
 	 */
 	allBoids.forEach(b => {
 		if(b.getId() !== boid.getId()){
-			let distance = b.getPosition().distance(boid.getPosition());
+			let distance = b.getPosition().distanceTo(boid.getPosition());
 
 			if(Math.abs(distance) < 100){
-				c.subtract(b.getPosition().subtract(boid.getPosition()));
+				c.subSelf(b.getPosition().subSelf(boid.getPosition()));
 			}
 		}
 	});
