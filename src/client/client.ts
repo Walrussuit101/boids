@@ -1,5 +1,5 @@
 import { Boid }from './models';
-import { Vector } from 'twojs-ts';
+import Two, { Vector } from 'twojs-ts';
 import {
 	ruleOne,
 	ruleTwo,
@@ -52,6 +52,15 @@ const main = (): void => {
 	const boids = initBoids(NUM_BOIDS);
 
 	console.log(boids);
+
+	let body = document.body;
+	let twojsParams = {
+		fullscreen: true
+	}
+
+	let two = new Two(twojsParams).appendTo(body);
+	two.makeCircle(two.width/2, two.height/2, 100).fill = "#000000";
+	two.update();
 }
 
 try{
