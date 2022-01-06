@@ -57,9 +57,12 @@ const main = (): void => {
 	let twojsParams = {
 		fullscreen: true
 	}
-
 	let two = new Two(twojsParams).appendTo(body);
-	two.makeCircle(two.width/2, two.height/2, 100).fill = "#000000";
+
+	let elipse = two.makeEllipse(two.width/2, two.height/2, 20, 10);
+	elipse.fill = "#ffffff";
+	elipse.rotation = 5;
+
 	two.update();
 }
 
