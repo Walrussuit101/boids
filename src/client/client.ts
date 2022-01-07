@@ -7,17 +7,32 @@ import {
 } from './utils';
 
 /**
+ * Get a random value between two numbers
+ * 
+ * @param low Lowest value for range
+ * @param high Highest value for range
+ * @returns Number between low & high
+ */
+const randomRange = (low: number, high: number) => {
+	return Math.floor(Math.random() * high);
+}
+
+/**
  * Initialize an array of Boids
  *
  * @param numBoids Number of boids to init
+ * @param screenWidth Width of screen
+ * @param screenHeight Height of screen
  * @returns Boid[]
  */
-const initBoids = (numBoids: number): Boid[] => {
+const initBoids = (numBoids: number, screenWidth: number, screenHeight: number): Boid[] => {
 	const boids: Boid[] = [];
 
 	// TODO: maybe randomize their x/y positions?
 	for(let i = 0; i < numBoids; i++){
-		let boid = new Boid(i+1, new Vector(0, 0), new Vector(0, 0));
+		let x = randomRange(0, screenWidth);
+		let y = randomRange(0, screenHeight);
+		let boid = new Boid(i+1, new Vector(x, y), new Vector(0, 0));
 		boids.push(boid);
 	}
 
@@ -47,23 +62,20 @@ const moveBoids = (allBoids: Boid[]): void => {
 }
 
 const main = (): void => {
-	const NUM_BOIDS = 10;
-
-	const boids = initBoids(NUM_BOIDS);
-
-	console.log(boids);
-
+	// init twojs
 	let body = document.body;
-	let twojsParams = {
-		fullscreen: true
-	}
+	let twojsParams = { fullscreen: true };
 	let two = new Two(twojsParams).appendTo(body);
 
-	let elipse = two.makeEllipse(two.width/2, two.height/2, 20, 10);
-	elipse.fill = "#ffffff";
-	elipse.rotation = 5;
+	// init constants
+	const NUM_BOIDS = 10;
+	const TWO_WIDTH = two.width;
+	const TWO_HEIGHT = two.height;
 
-	two.update();
+	// init boids
+	const boids = initBoids(NUM_BOIDS, TWO_WIDTH, TWO_HEIGHT);
+
+	console.log(boids);
 }
 
 try{
