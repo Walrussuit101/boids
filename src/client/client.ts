@@ -40,6 +40,26 @@ const initBoids = (numBoids: number, screenWidth: number, screenHeight: number):
 }
 
 /**
+ * Clear, update, and draw shapes on screen
+ * 
+ * @param allBoids All current boids
+ * @param two Twojs instance
+ */
+const drawBoids = (allBoids: Boid[], two: Two) => {
+	// clear all shapes
+	two.clear();
+
+	// add updated shapes
+	allBoids.forEach(boid => {
+		let boidPosition = boid.getPosition();
+		two.makeCircle(boidPosition.x, boidPosition.y, 10);
+	});
+
+	// render updated shapes
+	two.update();
+}
+
+/**
  * Move boids to new position after applying the 3 rules
  *
  * @param allBoids All current boids
@@ -75,7 +95,11 @@ const main = (): void => {
 	// init boids
 	const boids = initBoids(NUM_BOIDS, TWO_WIDTH, TWO_HEIGHT);
 
-	console.log(boids);
+	// update boids
+	// moveBoids(boids);
+
+	// draw boids
+	drawBoids(boids, two);
 }
 
 try{
