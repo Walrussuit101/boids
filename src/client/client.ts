@@ -21,7 +21,7 @@ const main = (): void => {
 
 		// draw boids
 		boidComps.drawBoids(boids, two);
-	}, 50);
+	}, 30);
 }
 
 try{
