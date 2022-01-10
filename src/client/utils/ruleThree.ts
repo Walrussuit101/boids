@@ -24,7 +24,7 @@ const ruleThree = (boid: Boid, allBoids: Boid[]): CustomVector => {
 	v.divideScalarSelf(nMinusOne);
 
 	v.subtractSelf(boid.getVelocity());
-	v.divideScalarSelf(8);
+	v.divideScalarSelf(4);
 
 	return v;
 }
