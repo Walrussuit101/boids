@@ -47,7 +47,7 @@ export const drawBoids = (allBoids: Boid[], two: Two) => {
     // add updated shapes
     allBoids.forEach(boid => {
         let boidPosition = boid.getPosition();
-        two.makeCircle(boidPosition.x, boidPosition.y, 5);
+        two.makeCircle(boidPosition.x, boidPosition.y, 3);
     });
 
     // render updated shapes
@@ -76,6 +76,9 @@ export const moveBoids = (allBoids: Boid[], screenWidth: number, screenHeight: n
         let totalV = v1.add(v2.add(v3.add(v4)));
         b.addToVelocity(totalV);
 
+        // limit boid's velocity
+        limitVelocity(b);
+
         // update current Boid's position with it's new velocity
         b.move();
     })
@@ -91,7 +94,7 @@ export const moveBoids = (allBoids: Boid[], screenWidth: number, screenHeight: n
  * @param Ymax highest y value
  * @returns Vector
  */
-export const boundBoid = (boid: Boid, Xmin: number, Xmax: number, Ymin: number, Ymax: number) => {
+const boundBoid = (boid: Boid, Xmin: number, Xmax: number, Ymin: number, Ymax: number) => {
     let v = new CustomVector(0, 0);
     let boidPosition = boid.getPosition();
     const ENCOURAGE = 10;
@@ -109,4 +112,19 @@ export const boundBoid = (boid: Boid, Xmin: number, Xmax: number, Ymin: number, 
     }
 
     return v;
+}
+
+const limitVelocity = (boid: Boid) => {
+    const VELOCITY_LIMIT = 15;
+    let boidVelocity = boid.getVelocity();
+
+    if(Math.abs(boidVelocity.x) > VELOCITY_LIMIT){
+        let sign = Math.sign(boidVelocity.x);
+        boidVelocity.x = sign * VELOCITY_LIMIT;
+    }
+
+    if(Math.abs(boidVelocity.y) > VELOCITY_LIMIT){
+        let sign = Math.sign(boidVelocity.y);
+        boidVelocity.y = sign * VELOCITY_LIMIT;
+    }
 }
