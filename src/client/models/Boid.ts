@@ -1,12 +1,12 @@
-import { Vector } from 'twojs-ts';
+import { CustomVector } from './';
 
 class Boid{
 
 	private id: number;
-	private position: Vector;
-	private velocity: Vector;
+	private position: CustomVector;
+	private velocity: CustomVector;
 
-	constructor(id: number, positionVector: Vector, velocityVector: Vector){
+	constructor(id: number, positionVector: CustomVector, velocityVector: CustomVector){
 		this.id = id;
 		this.position = positionVector;
 		this.velocity = velocityVector;
@@ -26,7 +26,7 @@ class Boid{
 	 *
 	 * @returns Vector
 	 */
-	getPosition(): Vector{
+	getPosition(): CustomVector{
 		return this.position;
 	}
 
@@ -35,7 +35,7 @@ class Boid{
 	 *
 	 * @returns Vector
 	 */
-	getVelocity(): Vector{
+	getVelocity(): CustomVector{
 		return this.velocity;
 	}
 
@@ -54,7 +54,7 @@ class Boid{
 	 * @param vectorToAdd Vector to add to boid's velocity
 	 * @returns void
 	 */
-	addToVelocity(vectorToAdd: Vector): void {
+	addToVelocity(vectorToAdd: CustomVector): void {
 		this.velocity.addSelf(vectorToAdd);
 	}
 }

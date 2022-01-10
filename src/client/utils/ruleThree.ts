@@ -1,5 +1,4 @@
-import { Boid } from '../models';
-import { Vector } from 'twojs-ts';
+import { Boid, CustomVector } from '../models';
 
 /**Get the velocity Vector after applying rule three
  *
@@ -10,9 +9,9 @@ import { Vector } from 'twojs-ts';
  * @param allBoids All the current boids
  * @returns Vector
  */
-const ruleThree = (boid: Boid, allBoids: Boid[]): Vector => {
+const ruleThree = (boid: Boid, allBoids: Boid[]): CustomVector => {
 	
-	let v = new Vector(0, 0);
+	let v = new CustomVector(0, 0);
 
 	// create a new velocity based on all other boids' velocities
 	allBoids.forEach(b => {
@@ -22,7 +21,10 @@ const ruleThree = (boid: Boid, allBoids: Boid[]): Vector => {
 	});
 
 	let nMinusOne = allBoids.length - 1;
-	v.divideScalar(new Vector(nMinusOne, nMinusOne));
+	v.divideScalarSelf(nMinusOne);
+
+	v.subtractSelf(boid.getVelocity());
+	v.divideScalarSelf(8);
 
 	return v;
 }

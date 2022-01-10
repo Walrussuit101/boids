@@ -1,5 +1,5 @@
-import { Boid }from './models';
-import Two, { Vector } from 'twojs-ts';
+import { Boid, CustomVector }from './models';
+import Two from 'twojs-ts';
 import {
 	ruleOne,
 	ruleTwo,
@@ -18,6 +18,36 @@ const randomRange = (low: number, high: number) => {
 }
 
 /**
+ * Encourage a boid to stay within a defined space by changing its velocity
+ * 
+ * @param boid Boid to bound
+ * @param Xmin lowest x value
+ * @param Xmax highest x value
+ * @param Ymin lowest y value
+ * @param Ymax highest y value
+ * @returns Vector
+ */
+const boundBoid = (boid: Boid, Xmin: number, Xmax: number, Ymin: number, Ymax: number) => {
+	let v = new CustomVector(0, 0);
+	let boidPosition = boid.getPosition();
+	const ENCOURAGE = 10;
+
+	if(boidPosition.x < Xmin){
+		v.x = ENCOURAGE;
+	}else if (boidPosition.x > Xmax){
+		v.x = -ENCOURAGE;
+	}
+
+	if(boidPosition.y < Ymin){
+		v.y = ENCOURAGE;
+	}else if(boidPosition.y > Ymax){
+		v.y = -ENCOURAGE;
+	}
+
+	return v;
+}
+
+/**
  * Initialize an array of Boids
  *
  * @param numBoids Number of boids to init
@@ -32,7 +62,7 @@ const initBoids = (numBoids: number, screenWidth: number, screenHeight: number):
 	for(let i = 0; i < numBoids; i++){
 		let x = randomRange(0, screenWidth);
 		let y = randomRange(0, screenHeight);
-		let boid = new Boid(i+1, new Vector(x, y), new Vector(0, 0));
+		let boid = new Boid(i+1, new CustomVector(x, y), new CustomVector(0, 0));
 		boids.push(boid);
 	}
 
@@ -52,7 +82,7 @@ const drawBoids = (allBoids: Boid[], two: Two) => {
 	// add updated shapes
 	allBoids.forEach(boid => {
 		let boidPosition = boid.getPosition();
-		two.makeCircle(boidPosition.x, boidPosition.y, 10);
+		two.makeCircle(boidPosition.x, boidPosition.y, 5);
 	});
 
 	// render updated shapes
@@ -65,15 +95,18 @@ const drawBoids = (allBoids: Boid[], two: Two) => {
  * @param allBoids All current boids
  * @returns void
  */
-const moveBoids = (allBoids: Boid[]): void => {
+const moveBoids = (allBoids: Boid[], screenWidth: number, screenHeight: number): void => {
+	const PADDING = 100;
+
 	allBoids.forEach(b => {
 		// apply all rules to current Boid
 		let v1 = ruleOne(b, allBoids);
 		let v2 = ruleTwo(b, allBoids);
 		let v3 = ruleThree(b, allBoids);
+		let v4 = boundBoid(b, PADDING, screenWidth-PADDING, PADDING, screenHeight-PADDING);
 
 		// set current Boid's velocity to sum of v1,2,3
-		let totalV = v1.addSelf(v2.addSelf(v3));
+		let totalV = v1.add(v2.add(v3.add(v4)));
 		b.addToVelocity(totalV);
 
 		// update current Boid's position with it's new velocity
@@ -88,18 +121,20 @@ const main = (): void => {
 	let two = new Two(twojsParams).appendTo(body);
 
 	// init constants
-	const NUM_BOIDS = 10;
+	const NUM_BOIDS = 25;
 	const TWO_WIDTH = two.width;
 	const TWO_HEIGHT = two.height;
 
 	// init boids
 	const boids = initBoids(NUM_BOIDS, TWO_WIDTH, TWO_HEIGHT);
 
-	// update boids
-	// moveBoids(boids);
+	setInterval(() => {
+		// update boids
+		moveBoids(boids, TWO_WIDTH, TWO_HEIGHT);
 
-	// draw boids
-	drawBoids(boids, two);
+		// draw boids
+		drawBoids(boids, two);
+	}, 50);
 }
 
 try{

@@ -1,5 +1,4 @@
-import { Boid } from '../models';
-import { Vector } from 'twojs-ts';
+import { Boid, CustomVector } from '../models';
 
 /**Get the velocity Vector after applying rule two
  *
@@ -10,9 +9,9 @@ import { Vector } from 'twojs-ts';
  * @param allBoids All the current boids
  * @returns Vector 
  */
-const ruleTwo = (boid: Boid, allBoids: Boid[]): Vector => {
+const ruleTwo = (boid: Boid, allBoids: Boid[]): CustomVector => {
 
-	let c = new Vector(0, 0);
+	let c = new CustomVector(0, 0);
 
 	/* get a velocity for the boid `boid` to move
 	 *
@@ -21,10 +20,10 @@ const ruleTwo = (boid: Boid, allBoids: Boid[]): Vector => {
 	 */
 	allBoids.forEach(b => {
 		if(b.getId() !== boid.getId()){
-			let distance = b.getPosition().distanceTo(boid.getPosition());
+			let distance = b.getPosition().getDistance(boid.getPosition());
 
-			if(Math.abs(distance) < 100){
-				c.subSelf(b.getPosition().subSelf(boid.getPosition()));
+			if(Math.abs(distance) < 25){
+				c.subtractSelf(b.getPosition().subtract(boid.getPosition()));
 			}
 		}
 	});

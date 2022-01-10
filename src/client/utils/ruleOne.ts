@@ -1,5 +1,4 @@
-import { Boid } from '../models';
-import { Vector } from 'twojs-ts';
+import { Boid, CustomVector } from '../models';
 
 /**Get the velocity Vector after applying rule one
  *
@@ -10,9 +9,9 @@ import { Vector } from 'twojs-ts';
  * @param allBoids All the current boids
  * @returns Vector 
  */
-const ruleOne = (boid: Boid, allBoids: Boid[]): Vector => {
+const ruleOne = (boid: Boid, allBoids: Boid[]): CustomVector => {
 
-	let perceivedCenter = new Vector(0, 0);
+	let perceivedCenter = new CustomVector(0, 0);
 
 	// get the "perceived center" of all other boids
 	allBoids.forEach(b => {
@@ -22,11 +21,11 @@ const ruleOne = (boid: Boid, allBoids: Boid[]): Vector => {
 	});
 
 	let nMinusOne = allBoids.length - 1;
-	perceivedCenter.divideScalar(new Vector(nMinusOne, nMinusOne));
+	perceivedCenter.divideScalarSelf(nMinusOne);
 
 	// return velocity that is 1% towards the "perceived center"
-	perceivedCenter.subSelf(boid.getPosition());
-	perceivedCenter.divideScalar(new Vector(100, 100));
+	perceivedCenter.subtractSelf(boid.getPosition());
+	perceivedCenter.divideScalarSelf(100);
 
 	return perceivedCenter;
 }
