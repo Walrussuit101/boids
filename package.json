@@ -4,7 +4,7 @@
   "description": "JS/TS implementation of the Boids algorithm",
   "main": "index.ts",
   "scripts": {
-    "dev": "nodemon -e ts,html,json --exec \"npm start\"",
+    "dev": "nodemon -e ts,json,html,css --exec \"npm start\"",
     "start": "npm run compile:client && ts-node src/index.ts",
     "compile:client": "webpack --mode=production --no-stats",
     "compile:client:stats": "webpack --mode=production",

@@ -1,11 +1,19 @@
-import Two from 'twojs-ts';
+import Two, { ConstructionParams } from 'twojs-ts';
 import { boidComps } from './utils';
 
 const main = (): void => {
 	// init twojs
-	let body = document.body;
-	let twojsParams = { fullscreen: true };
-	let two = new Two(twojsParams).appendTo(body);
+	let field = document.getElementById("field");
+	let two: Two;
+
+	if(field){
+		let fieldStyles = getComputedStyle(field);
+		let twojsParams: ConstructionParams = {height: parseInt(fieldStyles.height), width: parseInt(fieldStyles.width)};
+		two = new Two(twojsParams).appendTo(field);
+	}else{
+		throw new Error("Field div not in document");
+	}
+
 
 	// init constants
 	const NUM_BOIDS = 25;

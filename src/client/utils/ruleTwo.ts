@@ -16,7 +16,7 @@ const ruleTwo = (boid: Boid, allBoids: Boid[]): CustomVector => {
 	/* get a velocity for the boid `boid` to move
 	 *
 	 * aka move the current boid away from another boid
-	 * if it is 100 units away
+	 * if it is 25 units away
 	 */
 	allBoids.forEach(b => {
 		if(b.getId() !== boid.getId()){
