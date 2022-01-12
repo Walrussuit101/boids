@@ -117,7 +117,7 @@ const boundBoid = (boid: Boid, Xmin: number, Xmax: number, Ymin: number, Ymax: n
 /**
  * Limit a boids x/y velocity
  * 
- * @param boid 
+ * @param boid Boid to limit velocity
  * @returns void
  */
 const limitVelocity = (boid: Boid): void => {
