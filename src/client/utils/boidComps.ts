@@ -121,7 +121,7 @@ const boundBoid = (boid: Boid, Xmin: number, Xmax: number, Ymin: number, Ymax: n
  * @returns void
  */
 const limitVelocity = (boid: Boid): void => {
-    const VELOCITY_LIMIT = 15;
+    const VELOCITY_LIMIT = 10;
     let boidVelocity = boid.getVelocity();
 
     if(Math.abs(boidVelocity.x) > VELOCITY_LIMIT){
