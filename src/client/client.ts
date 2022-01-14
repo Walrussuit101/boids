@@ -25,13 +25,15 @@ const main = (): void => {
 		BOID_SIZE = parseInt(target.value);
 	};
 
+	let VISUAL_RANGE = 75;
+
 	// init boids
-	const boids = boidComps.initBoids(25, two.width, two.height);
+	const boids = boidComps.initBoids(75, two.width, two.height);
 
 	// start game loop
 	setInterval(() => {
 		// update boids
-		boidComps.moveBoids(boids, two.width, two.height, VELOCITY_LIMIT);
+		boidComps.moveBoids(boids, two.width, two.height, VELOCITY_LIMIT, VISUAL_RANGE);
 
 		// draw boids
 		boidComps.drawBoids(boids, BOID_SIZE, two);

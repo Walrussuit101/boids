@@ -7,26 +7,32 @@ import { Boid, CustomVector } from '../models';
  *
  * @param boid Boid to apply the rule to
  * @param allBoids All the current boids
+ * @param VISUAL_RANGE Visual range of the boids
  * @returns Vector
  */
-const ruleThree = (boid: Boid, allBoids: Boid[]): CustomVector => {
+const ruleThree = (boid: Boid, allBoids: Boid[], VISUAL_RANGE: number): CustomVector => {
 	
 	let v = new CustomVector(0, 0);
+	let numNeighbors = 0;
 
 	// create a new velocity based on all other boids' velocities
 	allBoids.forEach(b => {
-		if(b.getId() !== boid.getId()){
+		if(b.getId() !== boid.getId() && b.getPosition().getDistance(boid.getPosition()) < VISUAL_RANGE){
 			v.addSelf(b.getVelocity());
+			numNeighbors++;
 		}
 	});
 
-	let nMinusOne = allBoids.length - 1;
-	v.divideScalarSelf(nMinusOne);
+	if(numNeighbors){
+		v.divideScalarSelf(numNeighbors);
 
-	v.subtractSelf(boid.getVelocity());
-	v.divideScalarSelf(4);
+		v.subtractSelf(boid.getVelocity());
+		v.divideScalarSelf(4);
 
-	return v;
+		return v;
+	}
+	
+	return new CustomVector(0, 0);	
 }
 
 export default ruleThree;

@@ -47,7 +47,7 @@ class CustomVector{
         let xComp = Math.pow(this.x - v.x, 2);
         let yComp = Math.pow(this.y - v.y, 2);
 
-        return Math.sqrt(xComp + yComp);
+        return Math.abs(Math.sqrt(xComp + yComp));
     }
 }
 

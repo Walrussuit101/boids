@@ -26,7 +26,7 @@ export const initBoids = (numBoids: number, screenWidth: number, screenHeight: n
     for(let i = 0; i < numBoids; i++){
         let x = randomRange(screenWidth);
         let y = randomRange(screenHeight);
-        let boid = new Boid(i+1, new CustomVector(x, y), new CustomVector(0, 0));
+        let boid = new Boid(i+1, new CustomVector(x, y), new CustomVector(1, 1));
         boids.push(boid);
     }
 
@@ -63,14 +63,14 @@ export const drawBoids = (allBoids: Boid[], boidSize: number, two: Two) => {
  * @param screenHeight Height of screen
  * @returns void
  */
-export const moveBoids = (allBoids: Boid[], screenWidth: number, screenHeight: number, VELOCITY_LIMIT: number): void => {
+export const moveBoids = (allBoids: Boid[], screenWidth: number, screenHeight: number, VELOCITY_LIMIT: number, VISUAL_RANGE: number): void => {
     const PADDING = 100;
 
     allBoids.forEach(b => {
         // apply all rules to current Boid
-        let v1 = ruleOne(b, allBoids);
-        let v2 = ruleTwo(b, allBoids);
-        let v3 = ruleThree(b, allBoids);
+        let v1 = ruleOne(b, allBoids, VISUAL_RANGE);
+        let v2 = ruleTwo(b, allBoids, VISUAL_RANGE);
+        let v3 = ruleThree(b, allBoids, VISUAL_RANGE);
         let v4 = boundBoid(b, PADDING, screenWidth-PADDING, PADDING, screenHeight-PADDING);
 
         // set current Boid's velocity to sum of v1,2,3

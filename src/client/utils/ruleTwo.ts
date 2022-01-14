@@ -7,9 +7,10 @@ import { Boid, CustomVector } from '../models';
  *
  * @param boid Boid to apply the rule to
  * @param allBoids All the current boids
+ * @param VISUAL_RANGE Visual range of the boids
  * @returns Vector 
  */
-const ruleTwo = (boid: Boid, allBoids: Boid[]): CustomVector => {
+const ruleTwo = (boid: Boid, allBoids: Boid[], VISUAL_RANGE: number): CustomVector => {
 
 	let c = new CustomVector(0, 0);
 
@@ -19,10 +20,10 @@ const ruleTwo = (boid: Boid, allBoids: Boid[]): CustomVector => {
 	 * if it is 25 units away
 	 */
 	allBoids.forEach(b => {
-		if(b.getId() !== boid.getId()){
+		if(b.getId() !== boid.getId() && b.getPosition().getDistance(boid.getPosition()) < VISUAL_RANGE){
 			let distance = b.getPosition().getDistance(boid.getPosition());
 
-			if(Math.abs(distance) < 25){
+			if(distance < 25){
 				c.subtractSelf(b.getPosition().subtract(boid.getPosition()));
 			}
 		}
