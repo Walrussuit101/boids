@@ -55,6 +55,7 @@ export const drawBoids = (allBoids: Boid[], two: Two) => {
 
 /**
  * Move boids to new position after applying the 3 rules
+ * and other modifiers
  *
  * @param allBoids All current boids
  * @param screenWidth Width of screen
