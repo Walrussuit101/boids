@@ -37,16 +37,17 @@ export const initBoids = (numBoids: number, screenWidth: number, screenHeight: n
  * Clear, update, and draw shapes on screen
  * 
  * @param allBoids All current boids
+ * @param boidSize Size of the boids
  * @param two Twojs instance
  */
-export const drawBoids = (allBoids: Boid[], two: Two) => {
+export const drawBoids = (allBoids: Boid[], boidSize: number, two: Two) => {
     // clear all shapes
     two.clear();
 
     // add updated shapes
     allBoids.forEach(boid => {
         let boidPosition = boid.getPosition();
-        two.makeCircle(boidPosition.x, boidPosition.y, 3);
+        two.makeCircle(boidPosition.x, boidPosition.y, boidSize);
     });
 
     // render updated shapes

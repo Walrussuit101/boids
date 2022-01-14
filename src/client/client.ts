@@ -19,6 +19,12 @@ const main = (): void => {
 		VELOCITY_LIMIT = parseInt(target.value);
 	};
 
+	let BOID_SIZE = 5;
+	controls.getController("boidSize").onchange = (e) => {
+		let target = e.target as HTMLInputElement;
+		BOID_SIZE = parseInt(target.value);
+	};
+
 	// init boids
 	const boids = boidComps.initBoids(25, two.width, two.height);
 
@@ -28,7 +34,7 @@ const main = (): void => {
 		boidComps.moveBoids(boids, two.width, two.height, VELOCITY_LIMIT);
 
 		// draw boids
-		boidComps.drawBoids(boids, two);
+		boidComps.drawBoids(boids, BOID_SIZE, two);
 	}, 30);
 }
 
