@@ -57,6 +57,17 @@ class Boid{
 	addToVelocity(vectorToAdd: CustomVector): void {
 		this.velocity.addSelf(vectorToAdd);
 	}
+
+	/**
+	 * Determine if a boid can see another boid
+	 * 
+	 * @param otherBoid Boid to determine if this boid can see
+	 * @param VISUAL_RANGE Visual range of all boids
+	 * @returns Boolean
+	 */
+	canSee(otherBoid: Boid, VISUAL_RANGE: number): boolean{
+		return this.getPosition().getDistance(otherBoid.getPosition()) < VISUAL_RANGE;
+	}
 }
 
 export default Boid;
