@@ -61,7 +61,7 @@ export const drawBoids = (allBoids: Boid[], two: Two) => {
  * @param screenHeight Height of screen
  * @returns void
  */
-export const moveBoids = (allBoids: Boid[], screenWidth: number, screenHeight: number): void => {
+export const moveBoids = (allBoids: Boid[], screenWidth: number, screenHeight: number, VELOCITY_LIMIT: number): void => {
     const PADDING = 100;
 
     allBoids.forEach(b => {
@@ -76,7 +76,7 @@ export const moveBoids = (allBoids: Boid[], screenWidth: number, screenHeight: n
         b.addToVelocity(totalV);
 
         // limit boid's velocity
-        limitVelocity(b);
+        limitVelocity(b, VELOCITY_LIMIT);
 
         // update current Boid's position with it's new velocity
         b.move();
@@ -117,10 +117,10 @@ const boundBoid = (boid: Boid, Xmin: number, Xmax: number, Ymin: number, Ymax: n
  * Limit a boids x/y velocity
  * 
  * @param boid Boid to limit velocity
+ * @param VELOCITY_LIMIT Velocity speed to limit the boid to
  * @returns void
  */
-const limitVelocity = (boid: Boid): void => {
-    const VELOCITY_LIMIT = 10;
+const limitVelocity = (boid: Boid, VELOCITY_LIMIT: number): void => {
     let boidVelocity = boid.getVelocity();
 
     if(Math.abs(boidVelocity.x) > VELOCITY_LIMIT){
