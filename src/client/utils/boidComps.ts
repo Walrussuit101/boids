@@ -23,7 +23,6 @@ import Two from 'twojs-ts';
 export const initBoids = (numBoids: number, screenWidth: number, screenHeight: number): Boid[] => {
     const boids: Boid[] = [];
 
-    // TODO: maybe randomize their x/y positions?
     for(let i = 0; i < numBoids; i++){
         let x = randomRange(screenWidth);
         let y = randomRange(screenHeight);
