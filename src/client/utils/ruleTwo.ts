@@ -20,7 +20,7 @@ const ruleTwo = (boid: Boid, allBoids: Boid[], VISUAL_RANGE: number): CustomVect
 	 * if it is 25 units away
 	 */
 	allBoids.forEach(b => {
-		if(b.getId() !== boid.getId() && boid.canSee(b, VISUAL_RANGE)){
+		if(boid.canSee(b, VISUAL_RANGE) && b.getId() !== boid.getId()){
 			let distance = b.getPosition().getDistance(boid.getPosition());
 
 			if(distance < 25){

@@ -17,7 +17,7 @@ const ruleThree = (boid: Boid, allBoids: Boid[], VISUAL_RANGE: number): CustomVe
 
 	// create a new velocity based on all other boids' velocities
 	allBoids.forEach(b => {
-		if(b.getId() !== boid.getId() && boid.canSee(b, VISUAL_RANGE)){
+		if(boid.canSee(b, VISUAL_RANGE) && b.getId() !== boid.getId()){
 			v.addSelf(b.getVelocity());
 			numNeighbors++;
 		}

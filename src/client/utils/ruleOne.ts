@@ -17,7 +17,7 @@ const ruleOne = (boid: Boid, allBoids: Boid[], VISUAL_RANGE: number): CustomVect
 
 	// get the "perceived center" of all other boids
 	allBoids.forEach(b => {
-		if(b.getId() !== boid.getId() && boid.canSee(b, VISUAL_RANGE)){
+		if(boid.canSee(b, VISUAL_RANGE) && b.getId() !== boid.getId()){
 			perceivedCenter.addSelf(b.getPosition());
 			numNeighbors++;
 		}
