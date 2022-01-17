@@ -1,6 +1,7 @@
 import { Boid, CustomVector } from '../models';
 
-/**Get the velocity Vector after applying rule two
+/**
+ * Get the velocity CustomVector after applying rule two
  *
  * Rule Two:
  *  - Boids try to keep a small distance away from other objects (including other boids). 
@@ -8,17 +9,14 @@ import { Boid, CustomVector } from '../models';
  * @param boid Boid to apply the rule to
  * @param allBoids All the current boids
  * @param VISUAL_RANGE Visual range of the boids
- * @returns Vector 
+ * @returns CustomVector 
  */
 const ruleTwo = (boid: Boid, allBoids: Boid[], VISUAL_RANGE: number): CustomVector => {
 
 	let c = new CustomVector(0, 0);
 
-	/* get a velocity for the boid `boid` to move
-	 *
-	 * aka move the current boid away from another boid
-	 * if it is 25 units away
-	 */
+	// if the boid is not the current boid and the current boid can see it,
+	// calculate distance, if less than 25 move current boid away
 	allBoids.forEach(b => {
 		if(boid.canSee(b, VISUAL_RANGE) && b.getId() !== boid.getId()){
 			let distance = b.getPosition().getDistance(boid.getPosition());
