@@ -22,7 +22,7 @@ class Boid{
 	}
 
 	/**
-	 * Get the Boid's position Vector
+	 * Get the Boid's position CustomVector
 	 *
 	 * @returns Vector
 	 */
@@ -31,7 +31,7 @@ class Boid{
 	}
 
 	/**
-	 * Get the Boid's velocity Vector
+	 * Get the Boid's velocity CustomVector
 	 *
 	 * @returns Vector
 	 */
@@ -40,7 +40,7 @@ class Boid{
 	}
 
 	/**
-	 * "Move" the Boid by adding the Boid's velocity Victor to it's position Victor
+	 * "Move" the Boid by adding the Boid's velocity CustomVector to it's position CustomVector
 	 *
 	 * @returns void
 	 */
@@ -49,9 +49,9 @@ class Boid{
 	}
 
 	/**
-	 * Add a Vector to the Boid's velocity Vector
+	 * Add a CustomVector to the Boid's velocity CustomVector
 	 *
-	 * @param vectorToAdd Vector to add to boid's velocity
+	 * @param vectorToAdd CustomVector to add to boid's velocity
 	 * @returns void
 	 */
 	addToVelocity(vectorToAdd: CustomVector): void {
