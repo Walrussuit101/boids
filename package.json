@@ -2,13 +2,12 @@
   "name": "walrussuit101-boids",
   "version": "1.0.0",
   "description": "JS/TS implementation of the Boids algorithm",
-  "main": "index.ts",
+  "main": "server.ts",
   "scripts": {
     "dev": "nodemon -e ts,json,html,css --exec \"npm start\"",
-    "start": "npm run compile:client && ts-node src/index.ts",
+    "start": "npm run compile:client && ts-node src/server.ts",
     "compile:client": "webpack --mode=production --no-stats",
-    "compile:client:stats": "webpack --mode=production",
-    "client": "ts-node ./src/client/client.ts"
+    "compile:client:stats": "webpack --mode=production"
   },
   "repository": {
     "type": "git",
