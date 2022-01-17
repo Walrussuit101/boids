@@ -11,7 +11,7 @@ import { Boid, CustomVector } from '../models';
  * @param VISUAL_RANGE Visual range of the boids
  * @returns CustomVector 
  */
-const ruleTwo = (boid: Boid, allBoids: Boid[], VISUAL_RANGE: number): CustomVector => {
+const ruleTwo = (boid: Boid, allBoids: Boid[], VISUAL_RANGE: number, MOUSE_POSITION: CustomVector): CustomVector => {
 
 	let c = new CustomVector(0, 0);
 
@@ -26,6 +26,12 @@ const ruleTwo = (boid: Boid, allBoids: Boid[], VISUAL_RANGE: number): CustomVect
 			}
 		}
 	});
+
+	// also avoid mouse :)
+	let distanceFromMouse = boid.getPosition().getDistance(MOUSE_POSITION);
+	if(distanceFromMouse < 50){
+		c.subtractSelf(MOUSE_POSITION.subtract(boid.getPosition()));
+	}
 
 	return c;
 }

@@ -1,4 +1,5 @@
 import Two from 'twojs-ts';
+import { CustomVector } from './models';
 import { boidComps, twojsUtils, controls, interfaces } from './utils';
 
 /**
@@ -13,6 +14,7 @@ const initParams = (): interfaces.params => {
 	let BOID_SIZE = 5;
 	let VISUAL_RANGE = 75;
 	let NUM_BOIDS = 75;
+	let MOUSE_POSITION = new CustomVector(0, 0);
 
 	// update corresponding input elements
 	(controls.getController("velocityLimit") as HTMLInputElement).value = VELOCITY_LIMIT.toString();
@@ -24,7 +26,8 @@ const initParams = (): interfaces.params => {
 		VELOCITY_LIMIT,
 		BOID_SIZE,
 		VISUAL_RANGE,
-		NUM_BOIDS
+		NUM_BOIDS,
+		MOUSE_POSITION
 	}
 }
 
@@ -57,6 +60,11 @@ const main = (): void => {
 		params.VISUAL_RANGE = parseInt(target.value);
 	};
 
+	document.onmousemove = (e) => {
+		params.MOUSE_POSITION.x = e.clientX;
+		params.MOUSE_POSITION.y = e.clientY;
+	}
+
 	// init boids
 	let boids = boidComps.initBoids(params.NUM_BOIDS, two.width, two.height);
 
@@ -75,7 +83,7 @@ const main = (): void => {
 	// start game loop
 	setInterval(() => {
 		// update boids
-		boidComps.moveBoids(boids, two.width, two.height, params.VELOCITY_LIMIT, params.VISUAL_RANGE);
+		boidComps.moveBoids(boids, two.width, two.height, params.VELOCITY_LIMIT, params.VISUAL_RANGE, params.MOUSE_POSITION);
 
 		// draw boids
 		boidComps.drawBoids(boids, params.BOID_SIZE, two);

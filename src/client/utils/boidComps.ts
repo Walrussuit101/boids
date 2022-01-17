@@ -63,13 +63,13 @@ export const drawBoids = (allBoids: Boid[], boidSize: number, two: Two) => {
  * @param screenHeight Height of screen
  * @returns void
  */
-export const moveBoids = (allBoids: Boid[], screenWidth: number, screenHeight: number, VELOCITY_LIMIT: number, VISUAL_RANGE: number): void => {
+export const moveBoids = (allBoids: Boid[], screenWidth: number, screenHeight: number, VELOCITY_LIMIT: number, VISUAL_RANGE: number, MOUSE_POSITION: CustomVector): void => {
     const PADDING = 100;
 
     allBoids.forEach(b => {
         // apply all rules to current Boid
         let v1 = ruleOne(b, allBoids, VISUAL_RANGE);
-        let v2 = ruleTwo(b, allBoids, VISUAL_RANGE);
+        let v2 = ruleTwo(b, allBoids, VISUAL_RANGE, MOUSE_POSITION);
         let v3 = ruleThree(b, allBoids, VISUAL_RANGE);
         let v4 = boundBoid(b, PADDING, screenWidth-PADDING, PADDING, screenHeight-PADDING);
 
