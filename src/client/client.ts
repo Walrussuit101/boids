@@ -10,7 +10,7 @@ import { boidComps, twojsUtils, controls, interfaces } from './utils';
  */
 const initParams = (): interfaces.params => {
 	// initial param values
-	let VELOCITY_LIMIT = 10;
+	let VELOCITY_LIMIT = 6;
 	let BOID_SIZE = 5;
 	let VISUAL_RANGE = 75;
 	let NUM_BOIDS = 75;
