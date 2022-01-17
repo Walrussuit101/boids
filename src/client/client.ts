@@ -12,16 +12,19 @@ const initParams = (): interfaces.params => {
 	let VELOCITY_LIMIT = 10;
 	let BOID_SIZE = 5;
 	let VISUAL_RANGE = 75;
+	let NUM_BOIDS = 75;
 
 	// update corresponding input elements
 	(controls.getController("velocityLimit") as HTMLInputElement).value = VELOCITY_LIMIT.toString();
 	(controls.getController("boidSize") as HTMLInputElement).value = BOID_SIZE.toString();
 	(controls.getController("visualRange") as HTMLInputElement).value = VISUAL_RANGE.toString();
+	(controls.getController("numBoids") as HTMLInputElement).value = NUM_BOIDS.toString();
 
 	return {
 		VELOCITY_LIMIT,
 		BOID_SIZE,
-		VISUAL_RANGE
+		VISUAL_RANGE,
+		NUM_BOIDS
 	}
 }
 
@@ -54,10 +57,20 @@ const main = (): void => {
 		params.VISUAL_RANGE = parseInt(target.value);
 	};
 
-	controls.getController("resetControls").onclick = () => {params = initParams()}
-
 	// init boids
-	const boids = boidComps.initBoids(75, two.width, two.height);
+	let boids = boidComps.initBoids(params.NUM_BOIDS, two.width, two.height);
+
+	// these listeners reset the boids array, so need to come after
+	controls.getController("resetControls").onclick = () => {
+		params = initParams();
+		boids = boidComps.initBoids(params.NUM_BOIDS, two.width, two.height);
+	}
+
+	controls.getController("numBoids").onchange = (e) => {
+		let target = e.target as HTMLInputElement;
+		params.NUM_BOIDS = parseInt(target.value);
+		boids = boidComps.initBoids(params.NUM_BOIDS, two.width, two.height);
+	};
 
 	// start game loop
 	setInterval(() => {
